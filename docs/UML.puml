@@ -1,0 +1,49 @@
+@startuml
+class Train {
+  - number_: int
+  - name_: string
+  - source_: string
+  - destination_: string
+  - departure_: string
+  - capacity_: int
+  - fare_: double
+  + display(): void
+}
+class Passenger {
+  - name_: string
+  - age_: int
+  - gender_: string
+  - phone_: string
+}
+enum BookingStatus {
+  Confirmed
+  Waitlisted
+  Cancelled
+}
+class Booking {
+  - pnr_: long long
+  - trainNumber_: int
+  - journeyDate_: string
+  - passenger_: Passenger
+  - status_: BookingStatus
+  - seatNumber_: int
+  + confirm(seatNumber: int): void
+  + cancel(): void
+  + display(): void
+}
+class RailwaySystem {
+  - trains_: map<int, Train>
+  - bookings_: vector<Booking>
+  - nextPnr_: long long
+  + listTrains(): void
+  + searchTrains(): void
+  + bookTicket(): void
+  + cancelTicket(): void
+  + checkPnr(): void
+  + showAvailability(): void
+}
+RailwaySystem o-- Train
+RailwaySystem o-- Booking
+Booking *-- Passenger
+Booking --> BookingStatus
+@enduml
